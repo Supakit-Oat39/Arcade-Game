@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a3326" />
+  <title>Arcade Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="home-header">
+      <h1>Arcade <span>Game</span></h1>
+      <p>เลือกเกมที่อยากเล่น</p>
+    </header>
+
+    <main>
+      <h2 class="section-label">เกมทั้งหมด</h2>
+      <div class="game-grid">
+        <a class="game-tile" href="games/party-cards/index.html">
+          <div class="tile-art" aria-hidden="true">
+            <div class="mini-card red">A♥&#xFE0E;</div>
+            <div class="mini-card back"></div>
+            <div class="mini-card black">K♠&#xFE0E;</div>
+          </div>
+          <div class="tile-body">
+            <h2>ไพ่ปาร์ตี้</h2>
+            <p>ผลัดกันเปิดไพ่ทีละใบ แต่ละใบมีหน้าที่ของมัน</p>
+            <div class="tile-meta">
+              <small>2 คนขึ้นไป</small>
+              <span class="btn small">เล่น</span>
+            </div>
+          </div>
+        </a>
+
+        <div class="game-tile locked" aria-disabled="true">
+          <div class="tile-art" aria-hidden="true">
+            <div class="mini-card back"></div>
+          </div>
+          <div class="tile-body">
+            <h2>เกมถัดไป</h2>
+            <p>กำลังพัฒนา</p>
+            <div class="tile-meta">
+              <small>เร็ว ๆ นี้</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">© Arcade Game</footer>
+  </div>
+</body>
+</html>

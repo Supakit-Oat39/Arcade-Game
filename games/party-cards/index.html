@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a3326" />
+  <title>ไพ่ปาร์ตี้ | Arcade Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <nav class="topbar">
+      <a href="../../index.html" class="btn ghost small">← หน้าแรก</a>
+      <h1 class="game-title">ไพ่ปาร์ตี้</h1>
+      <button id="resetBtn" class="btn ghost small" style="visibility:hidden">สับใหม่</button>
+    </nav>
+
+    <!-- ตั้งค่าผู้เล่น -->
+    <section id="setup" class="panel">
+      <h2>เล่นกี่คน?</h2>
+      <p class="hint">ระบบจะบอกว่าถึงตาผู้เล่นคนที่เท่าไหร่</p>
+      <div class="stepper">
+        <button id="minusBtn" type="button" class="step-btn" aria-label="ลดจำนวนคน">−</button>
+        <output id="playerCount" class="step-value" aria-live="polite">2</output>
+        <button id="plusBtn" type="button" class="step-btn" aria-label="เพิ่มจำนวนคน">+</button>
+      </div>
+      <button id="startBtn" class="btn">เริ่มเกม</button>
+    </section>
+
+    <!-- โต๊ะเล่น -->
+    <section id="table" class="table" hidden>
+      <div class="status">
+        <div id="turn" class="turn"></div>
+        <div class="counter"><strong id="remaining">52</strong> / 52 ใบ</div>
+      </div>
+
+      <div class="card-slot">
+        <div id="card" class="card">
+          <div class="face back" aria-hidden="true"></div>
+          <div class="face front" id="cardFront"></div>
+        </div>
+      </div>
+
+      <div id="role" class="role" aria-live="polite">
+        <p class="role-placeholder">กดปุ่มด้านล่างเพื่อเปิดไพ่ใบแรก</p>
+      </div>
+
+      <button id="flipBtn" class="btn flip-btn">เปิดไพ่</button>
+      <p class="hint key-hint">หรือกด Spacebar</p>
+
+      <details class="history">
+        <summary>ไพ่ที่เปิดแล้ว (<span id="historyCount">0</span>)</summary>
+        <ol id="historyList"></ol>
+      </details>
+    </section>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

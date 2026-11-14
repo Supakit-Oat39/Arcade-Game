@@ -1,0 +1,156 @@
+:root {
+  --felt-dark: #0a3326;
+  --felt: #0f4a37;
+  --felt-light: #17664c;
+  --panel: rgba(0, 0, 0, 0.22);
+  --panel-border: rgba(255, 255, 255, 0.10);
+  --text: #f4efe2;
+  --muted: #b7c9bd;
+  --gold: #e6b850;
+  --gold-dark: #b98c2a;
+  --card-white: #fbf8f1;
+  --suit-red: #c8102e;
+  --suit-black: #1d1d1f;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+
+/* กันจอซูมเวลาแตะปุ่มรัว ๆ บนมือถือ */
+button, .btn, a { touch-action: manipulation; }
+
+body {
+  min-height: 100vh;
+  font-family: "IBM Plex Sans Thai", system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  line-height: 1.5;
+  background-color: var(--felt-dark);
+  background-image:
+    radial-gradient(ellipse at 50% 30%, var(--felt-light) 0%, var(--felt) 45%, var(--felt-dark) 100%);
+  background-attachment: fixed;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px max(16px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+}
+@media (max-width: 600px) {
+  .container { padding-top: max(16px, env(safe-area-inset-top)); }
+  .home-header { padding: 32px 0 28px; }
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #2b1d05;
+  background: var(--gold);
+  box-shadow: 0 3px 0 var(--gold-dark);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.2s, opacity 0.2s;
+}
+.btn:hover { background: #efc566; }
+.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--gold-dark); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: 0 3px 0 var(--gold-dark); }
+.btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+.btn.ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  box-shadow: none;
+}
+.btn.ghost:hover { background: rgba(255, 255, 255, 0.06); }
+.btn.small { min-height: 38px; padding: 6px 16px; font-size: 14px; }
+
+/* ---------- Home ---------- */
+.home-header { text-align: center; padding: 48px 0 40px; }
+.home-header h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(36px, 8vw, 56px);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.home-header h1 span { color: var(--gold); }
+.home-header p { margin-top: 8px; color: var(--muted); font-size: 17px; }
+
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.game-tile {
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+a.game-tile:hover { transform: translateY(-4px); border-color: rgba(230, 184, 80, 0.6); }
+.game-tile.locked { opacity: 0.55; }
+
+.tile-art {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.18);
+  border-bottom: 1px solid var(--panel-border);
+}
+.tile-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.tile-body h2 { font-size: 20px; }
+.tile-body p { color: var(--muted); font-size: 14px; flex: 1; }
+.tile-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+.tile-meta small { color: var(--muted); }
+
+/* mini cards on home tile */
+.mini-card {
+  width: 64px;
+  height: 90px;
+  border-radius: 6px;
+  background: var(--card-white);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  display: grid;
+  place-items: center;
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 -8px;
+}
+.mini-card.red { color: var(--suit-red); }
+.mini-card.black { color: var(--suit-black); }
+.mini-card:nth-child(1):not(:only-child) { transform: rotate(-12deg) translateY(6px); }
+.mini-card:nth-child(3) { transform: rotate(12deg) translateY(6px); }
+.mini-card.back {
+  background:
+    repeating-linear-gradient(45deg, #9e1b2c 0 6px, #b8283a 6px 12px);
+  border: 4px solid var(--card-white);
+}
+
+.site-footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 48px; }

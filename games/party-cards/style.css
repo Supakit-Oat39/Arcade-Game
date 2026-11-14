@@ -1,0 +1,237 @@
+[hidden] { display: none !important; }
+
+.topbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.topbar > :first-child { justify-self: start; }
+.topbar > :last-child { justify-self: end; }
+.game-title { font-family: "Playfair Display", Georgia, serif; font-size: clamp(22px, 5vw, 30px); }
+
+/* ---------- Setup ---------- */
+.panel {
+  max-width: 460px;
+  margin: 24px auto 0;
+  padding: 28px 24px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.panel h2 { font-size: 22px; }
+.hint { color: var(--muted); font-size: 14px; }
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 8px 0 4px;
+}
+.step-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.step-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.16); }
+.step-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.step-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.step-value {
+  min-width: 72px;
+  text-align: center;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ---------- Table ---------- */
+.table { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+.status {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  min-height: 32px;
+}
+.turn { font-size: 20px; font-weight: 600; }
+.turn em { font-style: normal; color: var(--gold); }
+.counter { color: var(--muted); font-size: 15px; margin-left: auto; }
+.counter strong { color: var(--text); font-size: 20px; }
+
+/* ---------- Playing card ---------- */
+.card-slot {
+  width: clamp(190px, 52vw, 250px);
+  aspect-ratio: 5 / 7;
+  perspective: 1200px;
+}
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.3, 0.1, 0.2, 1);
+}
+.card.flipped { transform: rotateY(180deg); }
+
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: 5.5% / 4%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 14px 28px rgba(0, 0, 0, 0.35);
+}
+
+.face.back {
+  background-color: var(--card-white);
+  padding: 6%;
+}
+.face.back::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 4%;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 38%, rgba(255, 255, 255, 0.18) 39% 41%, transparent 42%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.14) 0 2px, transparent 2px 10px),
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.14) 0 2px, transparent 2px 10px),
+    #a3182b;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+}
+
+.face.front {
+  transform: rotateY(180deg);
+  background: var(--card-white);
+  container-type: inline-size;
+  font-family: Georgia, "Times New Roman", serif;
+  overflow: hidden;
+}
+.front.red { color: var(--suit-red); }
+.front.black { color: var(--suit-black); }
+
+/* มุมไพ่ */
+.index {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  width: 13cqw;
+}
+.index .r { font-size: 15cqw; font-weight: 700; letter-spacing: -0.06em; }
+.index .s { font-size: 11cqw; margin-top: 1cqw; }
+.index.tl { top: 5cqw; left: 4cqw; }
+.index.br { bottom: 5cqw; right: 4cqw; transform: rotate(180deg); }
+
+/* ดอกกลางไพ่ */
+.pips { position: absolute; inset: 0; }
+.pip {
+  position: absolute;
+  font-size: 17cqw;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+}
+.pip.flip { transform: translate(-50%, -50%) rotate(180deg); }
+.pip.ace { font-size: 52cqw; }
+
+/* J Q K */
+.court {
+  position: absolute;
+  inset: 17% 19%;
+  border: 0.8cqw solid currentColor;
+  border-radius: 3cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2cqw;
+  background:
+    repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.035) 0 2px, transparent 2px 8px);
+}
+.court .big { font-size: 34cqw; font-weight: 700; line-height: 1; }
+.court .suit { font-size: 22cqw; line-height: 1; }
+.court .label {
+  font-family: "IBM Plex Sans Thai", sans-serif;
+  font-size: 6cqw;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* ---------- Role ---------- */
+.role {
+  width: 100%;
+  max-width: 420px;
+  min-height: 92px;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+.role h2 { font-size: 22px; color: var(--gold); }
+.role p { color: var(--text); font-size: 16px; }
+.role .role-placeholder { color: var(--muted); }
+.role.pop { animation: pop 0.35s ease; }
+@keyframes pop {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.flip-btn { min-width: 220px; min-height: 54px; font-size: 19px; }
+.key-hint { margin-top: -10px; font-size: 13px; }
+
+/* ---------- History ---------- */
+.history {
+  width: 100%;
+  max-width: 420px;
+  border-top: 1px solid var(--panel-border);
+  padding-top: 12px;
+}
+.history summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+.history ol { margin: 10px 0 0 22px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.history .red { color: #ff8a9a; }
+
+@media (hover: none) { .key-hint { display: none; } }
+
+/* ---------- มือถือ ---------- */
+@media (max-width: 600px) {
+  .table { gap: 16px; }
+  .flip-btn { width: 100%; max-width: 420px; min-height: 58px; }
+  .role { min-height: 84px; padding: 14px 16px; }
+  .role h2 { font-size: 20px; }
+  .role p { font-size: 15px; }
+  .turn { font-size: 18px; }
+}
+
+/* จอเตี้ย เช่น iPhone SE — ย่อไพ่ให้ปุ่มยังอยู่ในจอ */
+@media (max-height: 700px) and (max-width: 600px) {
+  .card-slot { width: clamp(160px, 44vw, 210px); }
+  .topbar { margin-bottom: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+  .role.pop { animation: none; }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "arcade-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "เว็บเกมอาเขต — Static site ไม่ต้อง build, เกมแรก: ไพ่ปาร์ตี้ (เปิดไพ่ทีละใบ)",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.mjs"
+  }
+}
